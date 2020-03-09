@@ -27,7 +27,13 @@
        [parent m-file]
        [callback
         (λ (i e)
-          (void))]
+          (get-file "Open"
+                    f
+                    #f
+                    #f
+                    #f
+                    null
+                    (list (list "Route2D Project (*.route2d)" "*.route2d"))))]
        [shortcut #\o]
        [shortcut-prefix '(ctl)]))
 (define mi-close
@@ -52,7 +58,13 @@
        [parent m-file]
        [callback
         (λ (i e)
-          (void))]))
+          (get-file "Import"
+                    f
+                    #f
+                    #f
+                    #f
+                    null
+                    (list (list "Route2D Project (*.route2d)" "*.route2d"))))]))
 (define mi-increment-and-save
   (new menu-item%
        [label "Increment and Save"]
@@ -83,7 +95,8 @@
        [parent m-file]
        [callback
         (λ (i e)
-          (void))]))
+          (get-page-setup-from-user "Print Setup"
+                                    f))]))
 (define m-file-s2
   (new separator-menu-item%
        [parent m-file]))
@@ -93,21 +106,41 @@
        [parent m-file]
        [callback
         (λ (i e)
-          (void))]))
+          (get-file "Import"
+                    f
+                    #f
+                    #f
+                    #f
+                    null
+                    (list (list "All files (*.*)" "*.*")
+                          (list "Encapsulated PostScript (*.eps)" "*.eps")
+                          (list "Scalable Vector Graphics (*.svg)" "*.svg"))))]))
 (define mi-export
   (new menu-item%
        [label "Export..."]
        [parent m-file]
        [callback
         (λ (i e)
-          (void))]))
+          (put-file "Export"
+                    f
+                    #f
+                    #f
+                    #f
+                    null
+                    (list (list "All files (*.*)" "*.*")
+                          (list "Encapsulated PostScript (*.eps)" "*.eps")
+                          (list "Scalable Vector Graphics (*.svg)" "*.svg"))))]))
 (define mi-open-application-data-folder
   (new menu-item%
        [label "Open Application Data Folder..."]
        [parent m-file]
        [callback
         (λ (i e)
-          (void))]))
+          (shell-execute "explore"
+                         ""
+                         ""
+                         (current-directory)
+                         'sw_show))]))
 (define m-file-s3
   (new separator-menu-item%
        [parent m-file]))
@@ -296,8 +329,8 @@
           (void))]))
 (define sm-toolpath-drawing
   (new menu%
-   [label "Toolpath Drawing"]
-   [parent m-toolpaths]))
+       [label "Toolpath Drawing"]
+       [parent m-toolpaths]))
 (define mi-draw-2d-previews
   (new checkable-menu-item%
        [label "Draw 2D Previews"]
