@@ -58,7 +58,7 @@
        [parent m-file]
        [callback
         (λ (i e)
-          (get-file "Import"
+          (put-file "Save As"
                     f
                     #f
                     #f
@@ -71,7 +71,9 @@
        [parent m-file]
        [callback
         (λ (i e)
-          (void))]))
+          (void))]
+       [shortcut #\s]
+       [shortcut-prefix (list 'ctl 'alt)]))
 (define m-file-s1
   (new separator-menu-item%
        [parent m-file]))
